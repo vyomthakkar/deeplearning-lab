@@ -1,4 +1,5 @@
 import torch
+import random
 
 data_path = "../data/names.txt"
 
@@ -30,7 +31,28 @@ def build_dataset(words):
 
 X, Y = build_dataset(words)
 
-print(X.shape, Y.shape)
+random.seed(42)
+random.shuffle(words)
+
+n1 = int(0.8*len(words))
+n2 = int(0.9*len(words))
+
+Xtr, Ytr = build_dataset(words[:n1])
+Xdev, Ydev = build_dataset(words[n1:n2])
+Xtest, Ytest = build_dataset(words[n2:])
+
+print(Xtr.shape, Ytr.shape)
+print(Xdev.shape, Ydev.shape)
+print(Xtest.shape, Ytest.shape)
+
+
+
+
+
+
+
+ 
+
 
          
         
