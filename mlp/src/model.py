@@ -23,4 +23,6 @@ parameters = [C, W1, W2, b2, bngain, bnbias]
 print(sum(p.nelement() for p in parameters))
 for p in parameters:
     p.requires_grad = True
+    
+
 
