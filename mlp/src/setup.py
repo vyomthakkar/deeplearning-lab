@@ -1,7 +1,9 @@
 import torch
 import random
+import os
 
-data_path = "data/names.txt"
+# Get the absolute path to the data file relative to this script's location
+data_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data", "names.txt")
 
 words = open(data_path, 'r').read().splitlines()
 
