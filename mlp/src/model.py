@@ -20,7 +20,7 @@ bnmean_running = torch.zeros((1, n_hidden))
 bnstd_running = torch.ones((1, n_hidden))
 
 # parameters = [C, W1, W2, b2, bngain, bnbias]
-parameters = [W1, W2, b1, b2]
+parameters = [C, W1, W2, b1, b2]
 print(sum(p.nelement() for p in parameters))
 for p in parameters:
     p.requires_grad = True

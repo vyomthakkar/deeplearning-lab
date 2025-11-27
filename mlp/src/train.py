@@ -13,14 +13,14 @@ for i in range(max_steps):
     Xb, Yb = setup.Xtr[ix], setup.Ytr[ix]    
     
     #forward pass
-    emb = model.C[setup.Xtr]
+    emb = model.C[Xb]
     embcat = emb.view(emb.shape[0], -1)
     hpreact = embcat @ model.W1 + model.b1
     h = torch.tanh(hpreact)
     logits = h @ model.W2 + model.b2
 
     #compute loss
-    loss = F.cross_entropy(logits, setup.Ytr)
+    loss = F.cross_entropy(logits, Yb)
     
     #zero out gradients
     for p in model.parameters:
