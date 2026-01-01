@@ -9,7 +9,7 @@ n_hidden = 200 #number of neurons in the hidden layer of the MLP
 g = torch.Generator().manual_seed(2147483647)
 C = torch.randn((vocab_size, n_embd), generator=g)
 W1 = torch.randn((n_embd * block_size, n_hidden), generator=g)
-b1 = torch.randn((n_hidden), generator=g)
+# b1 = torch.randn((n_hidden), generator=g) #dont need this because we use batchnorm
 W2 = torch.randn((n_hidden, vocab_size), generator=g)
 b2 = torch.randn((vocab_size), generator=g)
 
@@ -19,8 +19,7 @@ bnbias = torch.zeros((1, n_hidden))
 bnmean_running = torch.zeros((1, n_hidden))
 bnstd_running = torch.ones((1, n_hidden))
 
-# parameters = [C, W1, W2, b2, bngain, bnbias]
-parameters = [C, W1, W2, b1, b2]
+parameters = [C, W1, W2, b2, bngain, bnbias]
 print(sum(p.nelement() for p in parameters))
 for p in parameters:
     p.requires_grad = True
