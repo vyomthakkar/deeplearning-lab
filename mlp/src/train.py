@@ -15,7 +15,7 @@ for i in range(max_steps):
     #forward pass
     emb = model.C[Xb]
     embcat = emb.view(emb.shape[0], -1)
-    hpreact = embcat @ model.W1 + model.b1
+    hpreact = embcat @ model.W1 #+ model.b1
     h = torch.tanh(hpreact)
     logits = h @ model.W2 + model.b2
 
