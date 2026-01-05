@@ -16,6 +16,16 @@ for i in range(max_steps):
     emb = model.C[Xb]
     embcat = emb.view(emb.shape[0], -1)
     hpreact = embcat @ model.W1 #+ model.b1
+    
+    #batch norm
+    bnmeani = hpreact.mean(0, keepdim=True)
+    bnstdi = hpreact.std(0, keepdim=True)
+    hpreact = model.bngain * ((hpreact - bnmeani) / bnstdi) + model.bnbias
+    with torch.no_grad():
+        model.bnmean_running = 0.999 * model.bnmean_running + 0.001 * bnmeani
+        model.bnstd_running = 0.999 * model.bnstd_running + 0.001 * bnstdi
+    
+    #nonlinearity
     h = torch.tanh(hpreact)
     logits = h @ model.W2 + model.b2
 
