@@ -20,7 +20,7 @@ for i in range(max_steps):
     #batch norm
     bnmeani = hpreact.mean(0, keepdim=True)
     bnstdi = hpreact.std(0, keepdim=True)
-    hpreact = model.bngain * ((hpreact - bnmeani) / bnstdi) + model.bnbias
+    hpreact = model.bngain * ((hpreact - bnmeani) / (bnstdi + 1e-5)) + model.bnbias
     with torch.no_grad():
         model.bnmean_running = 0.999 * model.bnmean_running + 0.001 * bnmeani
         model.bnstd_running = 0.999 * model.bnstd_running + 0.001 * bnstdi

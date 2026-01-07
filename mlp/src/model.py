@@ -11,7 +11,7 @@ C = torch.randn((vocab_size, n_embd), generator=g)
 W1 = torch.randn((n_embd * block_size, n_hidden), generator=g) * (5/3)/((n_embd*block_size)**0.5)
 # b1 = torch.randn((n_hidden), generator=g) #dont need this because we use batchnorm
 W2 = torch.randn((n_hidden, vocab_size), generator=g) * 0.01
-b2 = torch.randn((vocab_size), generator=g)
+b2 = torch.zeros((vocab_size))
 
 #Batchnorm params
 bngain = torch.ones((1, n_hidden))
